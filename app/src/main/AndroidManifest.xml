@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HangMan">
         <activity
+            android:name=".EndGameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CatrgoriesActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
