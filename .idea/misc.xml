@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/alize/AndroidStudioProjects/HangManGame/app/src/main/res/drawable/anim.xml" value="0.2703125" />
+        <entry key="..\:/Users/alize/AndroidStudioProjects/HangManGame/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/Users/alize/AndroidStudioProjects/HangManGame/app/src/main/res/layout/activity_catrgories.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/alize/AndroidStudioProjects/HangManGame/app/src/main/res/layout/activity_main.xml" value="0.1875" />
+        <entry key="..\:/Users/alize/AndroidStudioProjects/HangManGame/app/src/main/res/layout/anim.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/AndroidStudioProjects/HangMan/app/src/main/res/layout/activity_main.xml" value="0.35260416666666666" />
       </map>
     </option>
