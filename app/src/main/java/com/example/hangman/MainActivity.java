@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         String CurrentCategory = GameHandler.GetCurrentCategory();
 
         categories = findViewById(R.id.btnCat);
+        categories.setText(CurrentCategory);
+
         start = findViewById(R.id.btnStart);
 
         categories.setOnClickListener(new View.OnClickListener() {
