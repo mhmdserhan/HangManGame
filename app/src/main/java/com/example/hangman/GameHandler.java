@@ -15,9 +15,6 @@ import java.util.Random;
 
 public class GameHandler {
 
-    static String CurrentGameCategory = "Animals";
-
-
     static HashMap<String, ArrayList<String>> GameWordDataCache = new HashMap<String, ArrayList<String>>();
     static HashMap<String, ArrayList<String>> GameWordData = new HashMap<String, ArrayList<String>>(){
         {
@@ -71,6 +68,8 @@ public class GameHandler {
             });
         }
     };
+
+    static String CurrentGameCategory = GenerateRandomCategory();
 
     public static String GetNextWord(){
         if(!GameWordDataCache.containsKey(CurrentGameCategory)) GameWordDataCache.put(CurrentGameCategory, new ArrayList<String>());
