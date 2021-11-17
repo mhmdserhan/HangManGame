@@ -29,6 +29,19 @@ public class GameHandler {
                     add("cat");
                     add("frog");
                     add("wolf");
+                    add("bear");
+                    add("elephant");
+                    add("donkey");
+                    add("fish");
+                    add("goat");
+                    add("sheep");
+                    add("lion");
+                    add("tiger");
+                    add("mouse");
+                    add("snake");
+                    add("monkey");
+                    add("chicken");
+                    add("cow");
                 }
             });
             put("Sports", new ArrayList<String>() {
@@ -45,6 +58,13 @@ public class GameHandler {
                     add("steak");
                     add("lasagna");
                     add("pizza");
+                    add("cheese");
+                    add("butter");
+                    add("sandwich");
+                    add("bread");
+                    add("egg");
+                    add("bacon");
+                    add("fish");
                 }
             });
             put("Countries", new ArrayList<String>() {
@@ -53,6 +73,19 @@ public class GameHandler {
                     add("america");
                     add("africa");
                     add("germany");
+                    add("italy");
+                    add("spain");
+                    add("belgium");
+                    add("netherlands");
+                    add("turkey");
+                    add("china");
+                    add("japan");
+                    add("korea");
+                    add("jordan");
+                    add("egypt");
+                    add("morocco");
+                    add("tunisia");
+                    add("qatar");
                 }
             });
             put("Organs", new ArrayList<String>() {
@@ -61,6 +94,13 @@ public class GameHandler {
                     add("lungs");
                     add("brain");
                     add("eyes");
+                    add("muscles");
+                    add("liver");
+                    add("kidneys");
+                    add("skeleton");
+                    add("stomach");
+                    add("pancreas");
+                    add("veins");
                 }
             });
             put("Colors", new ArrayList<String>() {
@@ -69,6 +109,16 @@ public class GameHandler {
                     add("green");
                     add("purple");
                     add("black");
+                    add("white");
+                    add("blue");
+                    add("yellow");
+                    add("grey");
+                    add("pink");
+                    add("gold");
+                    add("cyan");
+                    add("turquoise");
+                    add("wheat");
+                    add("brown");
                 }
             });
         }

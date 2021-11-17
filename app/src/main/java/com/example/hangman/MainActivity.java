@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, GameActivity.class);
                 i.putExtra("currentCategory", CurrentCategory);
+                i.putExtra("parent", "MainActivity");
                 startActivity(i);
             }
         });
