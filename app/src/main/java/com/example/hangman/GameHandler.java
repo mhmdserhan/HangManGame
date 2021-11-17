@@ -8,8 +8,11 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 
@@ -100,6 +103,15 @@ public class GameHandler {
     }
 
     public static HashMap<String, Boolean> GetCategoryList(){
+        HashMap<String, Boolean> names = new HashMap<String, Boolean>();
+        for(String name : GameWordData.keySet()){
+            names.put(name, IsCategoryAvailable(name));
+        }
+        return names;
+    }
+
+    //Sort The Category Names List, Ascending Order Using The Length
+    public static HashMap<String, Boolean> GetCategoryListSorted(){
         HashMap<String, Boolean> names = new HashMap<String, Boolean>();
         for(String name : GameWordData.keySet()){
             names.put(name, IsCategoryAvailable(name));

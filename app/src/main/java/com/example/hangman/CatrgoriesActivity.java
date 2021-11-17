@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class CatrgoriesActivity extends AppCompatActivity {
 
@@ -23,15 +24,15 @@ public class CatrgoriesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catrgories);
 
-        HashMap<String, Boolean> CategoryList = GameHandler.GetCategoryList();
-        listV = findViewById(R.id.list);
-        ArrayAdapter<String> array = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item);
-
+        HashMap<String, Boolean> CategoryList = GameHandler.GetCategoryListSorted();
+        List<String> CategoryNames = new ArrayList<>();
+        List<Boolean> CategoryAvailability = new ArrayList<>();
         for(String name : CategoryList.keySet()){
-            //Name is category name
-            boolean isAvailable = CategoryList.get(name);
-            array.add(name);
+            CategoryAvailability.add(CategoryList.get(name));
+            CategoryNames.add(name);
         }
+        listV = findViewById(R.id.list);
+        CategoryListAdapter array = new CategoryListAdapter(this, R.layout.categorylistitem, CategoryNames, CategoryAvailability);
 
         listV.setAdapter(array);
 
