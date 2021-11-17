@@ -30,7 +30,6 @@ public class GameHandler {
                     add("frog");
                     add("wolf");
                     add("bear");
-                    add("elephant");
                     add("donkey");
                     add("fish");
                     add("goat");
@@ -77,7 +76,6 @@ public class GameHandler {
                     add("italy");
                     add("spain");
                     add("belgium");
-                    add("netherlands");
                     add("turkey");
                     add("china");
                     add("japan");
@@ -117,7 +115,6 @@ public class GameHandler {
                     add("pink");
                     add("gold");
                     add("cyan");
-                    add("turquoise");
                     add("wheat");
                     add("brown");
                 }
