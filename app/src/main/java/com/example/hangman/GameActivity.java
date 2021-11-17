@@ -2,9 +2,13 @@ package com.example.hangman;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -85,6 +89,13 @@ public class GameActivity extends AppCompatActivity {
                         currentHangManState++;
                         btn.setTextColor(Color.parseColor("#C9132A"));
                         UpdateImage();
+                        Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                        } else {
+                            //deprecated in API 26
+                            v.vibrate(500);
+                        }
                     }
                     btn.setEnabled(false);
                     CheckGameState();//Make Sure The Game Hasn't Ended
