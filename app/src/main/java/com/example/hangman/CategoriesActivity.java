@@ -2,29 +2,32 @@ package com.example.hangman;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CatrgoriesActivity extends AppCompatActivity {
+public class CategoriesActivity extends AppCompatActivity {
 
     private ListView listV;
+
+    private String returnToParent = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_catrgories);
+        setContentView(R.layout.activity_categories);
 
-        HashMap<String, Boolean> CategoryList = GameHandler.GetCategoryListSorted();
+        Intent currentIntent = getIntent();
+        returnToParent = currentIntent.getStringExtra("parent");
+
+
+        HashMap<String, Boolean> CategoryList = GameHandler.GetCategoryList();
         List<String> CategoryNames = new ArrayList<>();
         List<Boolean> CategoryAvailability = new ArrayList<>();
         for(String name : CategoryList.keySet()){
@@ -39,10 +42,20 @@ public class CatrgoriesActivity extends AppCompatActivity {
         listV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(CatrgoriesActivity.this, MainActivity.class);
-                GameHandler.SetCurrentCategory(array.getItem(i));
-                startActivity(intent);
+                if(returnToParent.equalsIgnoreCase("EndGameActivity")){
+                    Intent intent = new Intent(CategoriesActivity.this, GameActivity.class);
+                    GameHandler.SetCurrentCategory(array.getItem(i));
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(CategoriesActivity.this, MainActivity.class);
+                    GameHandler.SetCurrentCategory(array.getItem(i));
+                    startActivity(intent);
+                }
+
+
             }
         });
     }
+
+
 }

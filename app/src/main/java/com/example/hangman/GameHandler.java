@@ -47,8 +47,9 @@ public class GameHandler {
             put("Sports", new ArrayList<String>() {
                 {
                     add("baseball");
-                    add("basketball");
                     add("football");
+                    add("tennis");
+                    add("pong");
                     add("soccer");
                 }
             });
@@ -164,15 +165,6 @@ public class GameHandler {
     }
 
     public static HashMap<String, Boolean> GetCategoryList(){
-        HashMap<String, Boolean> names = new HashMap<String, Boolean>();
-        for(String name : GameWordData.keySet()){
-            names.put(name, IsCategoryAvailable(name));
-        }
-        return names;
-    }
-
-    //Sort The Category Names List, Ascending Order Using The Length
-    public static HashMap<String, Boolean> GetCategoryListSorted(){
         HashMap<String, Boolean> names = new HashMap<String, Boolean>();
         for(String name : GameWordData.keySet()){
             names.put(name, IsCategoryAvailable(name));

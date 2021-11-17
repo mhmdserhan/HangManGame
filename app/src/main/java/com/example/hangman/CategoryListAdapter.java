@@ -2,6 +2,7 @@ package com.example.hangman;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,16 +51,20 @@ public class CategoryListAdapter extends ArrayAdapter<String> {
             }
             if (categoryButton != null) {
                 categoryButton.setText(p);
-                categoryButton.setEnabled(availablity.get(position));
             }
         }
 
         return v;
     }
 
-    private String generateRandomColor(){
+    @Override
+    public boolean isEnabled(int position) {//To Disable Finished Categories
+        return availablity.get(position);
+    }
+
+    private String generateRandomColor(){//Generate Random Dark Color
         Random obj = new Random();
-        int rand_num = obj.nextInt(0xffffff + 1);
+        int rand_num = obj.nextInt(0x646464 + 1);
         return String.format("#%06x", rand_num);
     }
 

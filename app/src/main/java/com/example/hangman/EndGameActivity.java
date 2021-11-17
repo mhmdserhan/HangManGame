@@ -3,9 +3,8 @@ package com.example.hangman;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,12 +26,11 @@ public class EndGameActivity extends AppCompatActivity {
 
         Intent currentIntent = getIntent();
         //Use these to know the data of the word (Preview it ex: The Word Was ...), And category to preview the old category before it change dif the words are finished, and know if the player won
-        String category = currentIntent.getStringExtra("currentCategory");
+        //String category = currentIntent.getStringExtra("currentCategory");
         String word = currentIntent.getStringExtra("guessedWord");
         won = Boolean.parseBoolean(currentIntent.getStringExtra("won"));
-//        int streak = GameHandler.GetStreak();//Current win streak
-//
-//        String CurrentCategory = GameHandler.GetCurrentCategory();//Use this to get the current category and hte above one to get the old
+
+        String CurrentCategory = GameHandler.GetCurrentCategory();//Use this to get the current category and hte above one to get the old
 
         gif = findViewById(R.id.gif);
         checkResult(won);
@@ -41,11 +39,11 @@ public class EndGameActivity extends AppCompatActivity {
         getWord(won, word);
 
         btnCateg = findViewById(R.id.btnCateg);
-        btnCateg.setText(category);
+        btnCateg.setText(CurrentCategory);
         btnCateg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(EndGameActivity.this, CatrgoriesActivity.class);
+                Intent i = new Intent(EndGameActivity.this, CategoriesActivity.class);
                 i.putExtra("parent", "EndGameActivity");
                 startActivity(i);
             }
@@ -78,10 +76,9 @@ public class EndGameActivity extends AppCompatActivity {
 
     public void getWord(boolean won, String word) {
         if (won) {
-            result.setText("Congratulations, You won");
+            result.setText("Good Job, Current Win Streak: " + GameHandler.GetStreak());
         } else {
-            result.setText("Game Over, the word was: " + word);
-            result.setTextColor(Color.RED);
+            result.setText(Html.fromHtml("Game Over, The Word Was <font color='#FF0000'>" + word + "</font>"));
         }
     }
 }
