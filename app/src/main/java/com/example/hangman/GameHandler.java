@@ -18,6 +18,8 @@ import java.util.Random;
 
 public class GameHandler {
 
+    static int CurrentGameStreak = 0;
+
     static HashMap<String, ArrayList<String>> GameWordDataCache = new HashMap<String, ArrayList<String>>();
     static HashMap<String, ArrayList<String>> GameWordData = new HashMap<String, ArrayList<String>>(){
         {
@@ -73,6 +75,15 @@ public class GameHandler {
     };
 
     static String CurrentGameCategory = GenerateRandomCategory();
+
+    public static int GetStreak(){
+        return CurrentGameStreak;
+    }
+
+    public static void UpdateStreak(boolean won){
+        if(won) CurrentGameStreak++;
+        else CurrentGameStreak = 0;
+    }
 
     public static String GetNextWord(){
         if(!GameWordDataCache.containsKey(CurrentGameCategory)) GameWordDataCache.put(CurrentGameCategory, new ArrayList<String>());

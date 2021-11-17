@@ -11,7 +11,7 @@
         android:id="@+id/roundTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Round: "
+        android:text="Streak: "
         android:fontFamily="@font/textdefaultfont"
         android:textFontWeight="600"
         app:layout_constraintBottom_toBottomOf="parent"
