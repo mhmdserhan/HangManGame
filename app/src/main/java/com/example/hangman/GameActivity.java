@@ -89,6 +89,8 @@ public class GameActivity extends AppCompatActivity {
                         currentHangManState++;
                         btn.setTextColor(Color.parseColor("#C9132A"));
                         UpdateImage();
+
+                        //Vibrate On Wrong Character
                         Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -151,12 +153,19 @@ public class GameActivity extends AppCompatActivity {
             GameHandler.UpdateStreak(true);
             startActivity(i);
         }else if(currentHangManState == 8){//Game Lost
+            //Vibrate On Wrong Character
+            Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                //deprecated in API 26
+                v.vibrate(1000);
+            }
             Intent i = new Intent(GameActivity.this, EndGameActivity.class);
             i.putExtra("currentCategory", CurrentCategory);
             i.putExtra("guessedWord", CurrentWord);
             i.putExtra("won", "false");
             GameHandler.UpdateStreak(false);
-
             startActivity(i);
         }
     }
