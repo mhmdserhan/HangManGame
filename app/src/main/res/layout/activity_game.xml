@@ -54,31 +54,31 @@
 
     <ImageButton
         android:id="@+id/home"
-        android:layout_width="48dp"
-        android:layout_height="43dp"
+        android:layout_width="31dp"
+        android:layout_height="28dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.643"
+        app:layout_constraintHorizontal_bias="0.846"
         app:layout_constraintStart_toEndOf="@+id/catBtn"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.014" />
+        app:layout_constraintVertical_bias="0.022" />
 
     <ImageButton
         android:id="@+id/btnSound"
         android:layout_width="31dp"
-        android:layout_height="28dp"
+        android:layout_height="32dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/sound_on"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home"
-        app:layout_constraintVertical_bias="0.027" />
+        app:layout_constraintEnd_toStartOf="@+id/home"
+        app:layout_constraintHorizontal_bias="0.793"
+        app:layout_constraintStart_toEndOf="@+id/catBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
     <ImageView
         android:id="@+id/hangImage"
