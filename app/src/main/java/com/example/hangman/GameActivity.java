@@ -23,12 +23,10 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity {
 
     private TextView roundTv, wordTv;
-    private Button catBtn, returnBtn;
-    private ImageButton soundBtn;
+    private Button catBtn;
+    private ImageButton soundBtn, home;
 
     private ImageView hangManImage;
-
-
 
     private int currentHangManState = 1;
 
@@ -53,7 +51,6 @@ public class GameActivity extends AppCompatActivity {
         wordTv = findViewById(R.id.word);
 
         catBtn = findViewById(R.id.catBtn);
-        returnBtn = findViewById(R.id.returnBtn);
 
         catBtn.setEnabled(false);
         catBtn.setText(CurrentCategory);
@@ -61,8 +58,18 @@ public class GameActivity extends AppCompatActivity {
         hangManImage = findViewById(R.id.hangImage);
 
         UpdateWord();
+//        returnBtn = findViewById(R.id.returnBtn);
+//        returnBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(GameActivity.this, MainActivity.class);
+//                music.stop();
+//                startActivity(i);
+//            }
+//        });
 
-        returnBtn.setOnClickListener(new View.OnClickListener() {
+        home = findViewById(R.id.home);
+        home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(GameActivity.this, MainActivity.class);

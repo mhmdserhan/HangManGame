@@ -22,35 +22,49 @@
         android:textSize="25dp"
         android:textColor="@color/black"/>
 
+    <!--    <Button-->
+<!--        android:id="@+id/returnBtn"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Home"-->
+<!--        android:textSize="12dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.95"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.017"-->
+<!--        android:backgroundTint="@color/firebrick"/>-->
+
     <Button
         android:id="@+id/catBtn"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
-        android:text="Animals"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017"
-        android:backgroundTint="@color/grey"
         android:layout_marginRight="17dp"
-        android:textColor="@color/white"/>
-
-    <Button
-        android:id="@+id/returnBtn"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
-        android:text="Home"
+        android:backgroundTint="@color/grey"
+        android:text="Animals"
+        android:textColor="@color/white"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.577"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017"
-        android:backgroundTint="@color/firebrick"/>
+        app:layout_constraintVertical_bias="0.014" />
+
+    <ImageButton
+        android:id="@+id/home"
+        android:layout_width="48dp"
+        android:layout_height="43dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.643"
+        app:layout_constraintStart_toEndOf="@+id/catBtn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.014" />
 
     <ImageButton
         android:id="@+id/btnSound"
@@ -63,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/returnBtn"
+        app:layout_constraintTop_toBottomOf="@+id/home"
         app:layout_constraintVertical_bias="0.027" />
 
     <ImageView
