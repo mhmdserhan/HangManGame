@@ -110,6 +110,7 @@ public class GameActivity extends AppCompatActivity {
         }
 
         music = MediaPlayer.create(GameActivity.this, R.raw.rope_music);
+        music.setVolume(0.1f, 0.1f);
         music.start();
         music.setLooping(true);
     }
