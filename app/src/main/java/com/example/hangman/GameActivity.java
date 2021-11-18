@@ -133,7 +133,7 @@ public class GameActivity extends AppCompatActivity {
 
         if (GameHandler.GetSound() == false) {
             music.pause();
-            soundBtn.setColorFilter(Color.RED);
+            soundBtn.setImageResource(R.drawable.sound_off);
             GameHandler.setSound(false);
         }
 
