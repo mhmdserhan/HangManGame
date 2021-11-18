@@ -13,6 +13,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
 
     private TextView roundTv, wordTv;
     private Button catBtn, returnBtn;
+    private ImageButton soundBtn;
 
     private ImageView hangManImage;
 
@@ -113,6 +115,20 @@ public class GameActivity extends AppCompatActivity {
         music.setVolume(0.1f, 0.1f);
         music.start();
         music.setLooping(true);
+
+        soundBtn = findViewById(R.id.btnSound);
+        soundBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (music.isPlaying()) {
+                    soundBtn.setColorFilter(Color.RED);
+                    music.pause();
+                } else {
+                    soundBtn.setColorFilter(Color.BLACK);
+                    music.start();
+                }
+            }
+        });
     }
 
     public void UpdateImage(){
