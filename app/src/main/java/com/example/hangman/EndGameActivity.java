@@ -3,7 +3,9 @@ package com.example.hangman;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,7 @@ public class EndGameActivity extends AppCompatActivity {
     private TextView result;
     private Button btnCateg, btnNewGame;
     private boolean won;
+    private MediaPlayer music;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,13 @@ public class EndGameActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
         getWord(won, word);
 
+        if (won) {
+            music = MediaPlayer.create(EndGameActivity.this, R.raw.win_music);
+        } else {
+            music = MediaPlayer.create(EndGameActivity.this, R.raw.lose_music);
+        }
+        music.start();
+
         btnCateg = findViewById(R.id.btnCateg);
         btnCateg.setText(CurrentCategory);
         btnCateg.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +55,7 @@ public class EndGameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(EndGameActivity.this, CategoriesActivity.class);
                 i.putExtra("parent", "EndGameActivity");
+                music.stop();
                 startActivity(i);
             }
         });
@@ -54,6 +65,7 @@ public class EndGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EndGameActivity.this, GameActivity.class);
+                music.stop();
                 startActivity(intent);
             }
         });
@@ -62,6 +74,7 @@ public class EndGameActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){//To Prevent Loading Earlier Intent States
         Intent setIntent = new Intent(this, MainActivity.class);
+        music.stop();
         startActivity(setIntent);
     }
 

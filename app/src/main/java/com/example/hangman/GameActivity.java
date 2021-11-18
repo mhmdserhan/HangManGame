@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -26,6 +27,8 @@ public class GameActivity extends AppCompatActivity {
     private ImageView hangManImage;
 
     private int currentHangManState = 1;
+
+    private MediaPlayer music;
 
     String CurrentWord = "", CurrentCategory = "";
 
@@ -59,6 +62,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(GameActivity.this, MainActivity.class);
+                music.stop();
                 startActivity(i);
             }
         });
@@ -105,6 +109,9 @@ public class GameActivity extends AppCompatActivity {
             });
         }
 
+        music = MediaPlayer.create(GameActivity.this, R.raw.rope_music);
+        music.start();
+        music.setLooping(true);
     }
 
     public void UpdateImage(){
@@ -151,6 +158,7 @@ public class GameActivity extends AppCompatActivity {
             i.putExtra("guessedWord", CurrentWord);
             i.putExtra("won", "true");
             GameHandler.UpdateStreak(true);
+            music.stop();
             startActivity(i);
         }else if(currentHangManState == 8){//Game Lost
             //Vibrate On Wrong Character
@@ -166,6 +174,7 @@ public class GameActivity extends AppCompatActivity {
             i.putExtra("guessedWord", CurrentWord);
             i.putExtra("won", "false");
             GameHandler.UpdateStreak(false);
+            music.stop();
             startActivity(i);
         }
     }
@@ -173,6 +182,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public void onBackPressed(){//To Prevent Loading Earlier Intent States
         Intent setIntent = new Intent(this, MainActivity.class);
+        music.stop();
         startActivity(setIntent);
     }
 
