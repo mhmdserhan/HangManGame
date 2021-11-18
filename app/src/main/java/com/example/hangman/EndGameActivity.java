@@ -46,6 +46,7 @@ public class EndGameActivity extends AppCompatActivity {
         } else {
             music = MediaPlayer.create(EndGameActivity.this, R.raw.lose_music);
         }
+        music.setVolume(0.1f, 0.1f);
         music.start();
 
         btnCateg = findViewById(R.id.btnCateg);
