@@ -54,11 +54,11 @@
 
     <ImageButton
         android:id="@+id/btnSound"
-        android:layout_width="46dp"
-        android:layout_height="38dp"
+        android:layout_width="31dp"
+        android:layout_height="28dp"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        android:src="@drawable/sound"
+        android:src="@drawable/sound_on"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.955"

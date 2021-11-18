@@ -28,6 +28,8 @@ public class GameActivity extends AppCompatActivity {
 
     private ImageView hangManImage;
 
+
+
     private int currentHangManState = 1;
 
     private MediaPlayer music;
@@ -117,15 +119,24 @@ public class GameActivity extends AppCompatActivity {
         music.setLooping(true);
 
         soundBtn = findViewById(R.id.btnSound);
+
+        if (GameHandler.GetSound() == false) {
+            music.pause();
+            soundBtn.setColorFilter(Color.RED);
+            GameHandler.setSound(false);
+        }
+
         soundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (music.isPlaying()) {
-                    soundBtn.setColorFilter(Color.RED);
+                if (GameHandler.GetSound()) {
                     music.pause();
+                    soundBtn.setImageResource(R.drawable.sound_off);
+                    GameHandler.setSound(false);
                 } else {
-                    soundBtn.setColorFilter(Color.BLACK);
                     music.start();
+                    soundBtn.setImageResource(R.drawable.sound_on);
+                    GameHandler.setSound(true);
                 }
             }
         });

@@ -1,5 +1,6 @@
 package com.example.hangman;
 
+import android.media.MediaPlayer;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,8 @@ import java.util.Random;
 public class GameHandler {
 
     static int CurrentGameStreak = 0;
+
+    static boolean soundOn = true;
 
     static HashMap<String, ArrayList<String>> GameWordDataCache = new HashMap<String, ArrayList<String>>();
     static HashMap<String, ArrayList<String>> GameWordData = new HashMap<String, ArrayList<String>>(){
@@ -128,6 +131,14 @@ public class GameHandler {
         return CurrentGameStreak;
     }
 
+    public static boolean GetSound() {
+        return soundOn;
+    }
+
+    public static void setSound(boolean newSound) {
+        soundOn = newSound;
+    }
+
     public static void UpdateStreak(boolean won){
         if(won) CurrentGameStreak++;
         else CurrentGameStreak = 0;
@@ -228,5 +239,4 @@ public class GameHandler {
         }
         return result;
     }
-
 }
