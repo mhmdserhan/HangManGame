@@ -32,7 +32,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.802">
+        app:layout_constraintVertical_bias="0.863">
 
         <Button
             android:id="@+id/btnCat"
@@ -49,6 +49,15 @@
             android:layout_height="70dp"
             android:backgroundTint="@color/purple_500"
             android:text="Start"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/btnStartCustom"
+            android:layout_width="155dp"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/purple_500"
+            android:text="Custom"
             android:textColor="@color/white"
             android:textSize="20dp" />
 

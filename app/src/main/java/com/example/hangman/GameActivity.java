@@ -59,15 +59,6 @@ public class GameActivity extends AppCompatActivity {
         hangManImage = findViewById(R.id.hangImage);
 
         UpdateWord();
-//        returnBtn = findViewById(R.id.returnBtn);
-//        returnBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(GameActivity.this, MainActivity.class);
-//                music.stop();
-//                startActivity(i);
-//            }
-//        });
 
         home = findViewById(R.id.home);
         home.setOnClickListener(new View.OnClickListener() {
@@ -125,29 +116,28 @@ public class GameActivity extends AppCompatActivity {
         }
 
         music = MediaPlayer.create(GameActivity.this, R.raw.rope_music);
-        music.setVolume(0.1f, 0.1f);
+        music.setVolume(0.3f, 0.3f);
         music.start();
         music.setLooping(true);
 
         soundBtn = findViewById(R.id.btnSound);
 
-        if (GameHandler.GetSound() == false) {
+        if (GameHandler.AreSoundsOn == false) {
             music.pause();
             soundBtn.setImageResource(R.drawable.sound_off);
-            GameHandler.setSound(false);
         }
 
         soundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (GameHandler.GetSound()) {
+                if (GameHandler.AreSoundsOn) {
                     music.pause();
                     soundBtn.setImageResource(R.drawable.sound_off);
-                    GameHandler.setSound(false);
+                    GameHandler.AreSoundsOn = false;
                 } else {
                     music.start();
                     soundBtn.setImageResource(R.drawable.sound_on);
-                    GameHandler.setSound(true);
+                    GameHandler.AreSoundsOn = true;
                 }
             }
         });
@@ -193,7 +183,6 @@ public class GameActivity extends AppCompatActivity {
     public void CheckGameState(){
         if(CurrentWord.equalsIgnoreCase(wordTv.getText().toString().replace(" ", ""))){
             Intent i = new Intent(GameActivity.this, EndGameActivity.class);
-            i.putExtra("currentCategory", CurrentCategory);
             i.putExtra("guessedWord", CurrentWord);
             i.putExtra("won", "true");
             GameHandler.UpdateStreak(true);
@@ -209,7 +198,6 @@ public class GameActivity extends AppCompatActivity {
                 v.vibrate(1000);
             }
             Intent i = new Intent(GameActivity.this, EndGameActivity.class);
-            i.putExtra("currentCategory", CurrentCategory);
             i.putExtra("guessedWord", CurrentWord);
             i.putExtra("won", "false");
             GameHandler.UpdateStreak(false);

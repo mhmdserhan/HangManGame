@@ -1,14 +1,19 @@
 package com.example.hangman;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Html;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +23,7 @@ public class EndGameActivity extends AppCompatActivity {
 
     private ImageView gif;
     private TextView result;
-    private Button btnCateg, btnNewGame;
+    private Button btnCateg, btnNewGame, btnNewGameExtra;
     private boolean won;
     private MediaPlayer music;
 
@@ -28,12 +33,12 @@ public class EndGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_end_game);
 
         Intent currentIntent = getIntent();
-        //Use these to know the data of the word (Preview it ex: The Word Was ...), And category to preview the old category before it change dif the words are finished, and know if the player won
-        //String category = currentIntent.getStringExtra("currentCategory");
         String word = currentIntent.getStringExtra("guessedWord");
         won = Boolean.parseBoolean(currentIntent.getStringExtra("won"));
 
         String CurrentCategory = GameHandler.GetCurrentCategory();//Use this to get the current category and hte above one to get the old
+
+        GameHandler.ResetCustomWord();
 
         gif = findViewById(R.id.gif);
         checkResult(won);
@@ -46,7 +51,7 @@ public class EndGameActivity extends AppCompatActivity {
         } else {
             music = MediaPlayer.create(EndGameActivity.this, R.raw.lose_music);
         }
-        music.setVolume(0.1f, 0.1f);
+        music.setVolume(0.3f, 0.3f);
         music.start();
 
         btnCateg = findViewById(R.id.btnCateg);
@@ -70,6 +75,43 @@ public class EndGameActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnNewGameExtra = findViewById(R.id.btnNewCustom);
+        btnNewGameExtra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(EndGameActivity.this);
+                alert.setTitle("Custom Word");
+                alert.setMessage("You can choose a custom word, and play the games with your friends!");
+
+                final EditText input = new EditText(EndGameActivity.this);
+                input.setKeyListener(DigitsKeyListener.getInstance("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"));
+
+
+                input.setRawInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+                alert.setView(input);
+
+                alert.setPositiveButton("Play", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String word = input.getText().toString();
+                        GameHandler.SetCustomWord(word);
+                        Intent i = new Intent(EndGameActivity.this, GameActivity.class);
+                        music.stop();
+                        startActivity(i);
+
+                    }
+                });
+
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Nothing to do here, the dialog will close on its own
+                    }
+                });
+
+                alert.show();
+            }
+        });
+
     }
 
     @Override
