@@ -62,6 +62,10 @@ public class CategoryListAdapter extends ArrayAdapter<String> {
         return availablity.get(position);
     }
 
+    /**
+     * This method picks a random color to categories
+     * @return String: random color
+     */
     private String generateRandomColor(){//Generate Random Dark Color
         Random obj = new Random();
         int rand_num = obj.nextInt(0x646464 + 1);

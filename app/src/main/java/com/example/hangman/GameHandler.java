@@ -1,32 +1,19 @@
 package com.example.hangman;
 
-import android.media.MediaPlayer;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.Random;
 
 public class GameHandler {
 
-    static int CurrentGameStreak = 0;
+    static int currentGameStreak = 0; // win streak
 
-    static boolean AreSoundsOn = true;
+    static boolean areSoundsOn = true;
 
-    static String CurrentCustomWord = "";
+    static String currentCustomWord = "";
 
-    static HashMap<String, ArrayList<String>> GameWordDataCache = new HashMap<String, ArrayList<String>>();
-    static HashMap<String, ArrayList<String>> GameWordData = new HashMap<String, ArrayList<String>>(){
+    static HashMap<String, ArrayList<String>> gameWordDataCache = new HashMap<String, ArrayList<String>>(); // words found
+    static HashMap<String, ArrayList<String>> gameWordData = new HashMap<String, ArrayList<String>>(){
         {
             put("Animals", new ArrayList<String>() {
                 {
@@ -127,97 +114,127 @@ public class GameHandler {
         }
     };
 
-    static String CurrentGameCategory = GenerateRandomCategory();
+    static String currentGameCategory = generateRandomCategory();
 
 
-    public static void SetCustomWord(String word){
-        CurrentCustomWord = word;
+    public static void setCustomWord(String word){
+        currentCustomWord = word;
     }
 
-    public static void ResetCustomWord(){
-        CurrentCustomWord = "";
+    public static void resetCustomWord(){
+        currentCustomWord = "";
     }
 
-    public static int GetStreak(){
-        return CurrentGameStreak;
+    public static int getStreak(){
+        return currentGameStreak;
     }
 
-    public static void UpdateStreak(boolean won){
-        if(won) CurrentGameStreak++;
-        else CurrentGameStreak = 0;
+    public static void updateStreak(boolean won){
+        if(won) currentGameStreak++;
+        else currentGameStreak = 0;
     }
 
-    public static String GetNextWord(){
-        if(!CurrentCustomWord.isEmpty()) return CurrentCustomWord;
-        if(!GameWordDataCache.containsKey(CurrentGameCategory)) GameWordDataCache.put(CurrentGameCategory, new ArrayList<String>());
+    /**
+     * This method get the next word in the category
+     * @return String next word
+     */
+    public static String getNextWord(){
+        if(!currentCustomWord.isEmpty()) return currentCustomWord;
+        if(!gameWordDataCache.containsKey(currentGameCategory)) gameWordDataCache.put(currentGameCategory, new ArrayList<String>());
         Random rand = new Random();
-        ArrayList<String> words = GetCategoryWords(CurrentGameCategory);
+        ArrayList<String> words = getCategoryWords(currentGameCategory);
         String word = words.get(rand.nextInt(words.size()));
-        while(GameWordDataCache.get(CurrentGameCategory).contains(word)){
+        while(gameWordDataCache.get(currentGameCategory).contains(word)){
             word = words.get(rand.nextInt(words.size()));
         }
-        GameWordDataCache.get(CurrentGameCategory).add(word);
+        gameWordDataCache.get(currentGameCategory).add(word);
         return word;
     }
 
-    public static ArrayList<String> GetCategoryWords(String category){
+    /**
+     * This method gets the words from the category
+     * @param category current category
+     * @return ArrayList<String> list of words
+     */
+    public static ArrayList<String> getCategoryWords(String category){
         ArrayList<String> names = new ArrayList<String>();
-        for(String name : GameWordData.get(category)){
+        for(String name : gameWordData.get(category)){
             names.add(name);
         }
         return names;
     }
 
-    public static ArrayList<String> GetCategoryNames(){
+    /**
+     * This method gets the categories from gameWordData map
+     * @return ArrayList<String> list of categories names
+     */
+    public static ArrayList<String> getCategoryNames(){
         ArrayList<String> names = new ArrayList<String>();
-        for(String name : GameWordData.keySet()){
+        for(String name : gameWordData.keySet()){
             names.add(name);
         }
         return names;
     }
 
-    public static HashMap<String, Boolean> GetCategoryList(){
+    /**
+     * This method gets available categories
+     * @return HashMap<String, Boolean> categories names
+     */
+    public static HashMap<String, Boolean> getCategoryList(){
         HashMap<String, Boolean> names = new HashMap<String, Boolean>();
-        for(String name : GameWordData.keySet()){
-            names.put(name, IsCategoryAvailable(name));
+        for(String name : gameWordData.keySet()){
+            names.put(name, isCategoryAvailable(name));
         }
         return names;
     }
 
-    public static String GetCurrentCategory(){
-        if(!IsCategoryAvailable(CurrentGameCategory)){
-            if(IsAnyCategoryAvailable()){
-                String category = GenerateRandomCategory();
-                CurrentGameCategory = category;
+    /**
+     * This method gets the category in progress
+     * @return String current category
+     */
+    public static String getCurrentCategory(){
+        if(!isCategoryAvailable(currentGameCategory)){
+            if(isAnyCategoryAvailable()){
+                String category = generateRandomCategory();
+                currentGameCategory = category;
                 return category;
             }else {
-                CurrentGameCategory = "NO_CATEGORIES";
+                currentGameCategory = "NO_CATEGORIES";
                 return "NO_CATEGORIES";//Game Ended
             }
         }
-        return CurrentGameCategory;
+        return currentGameCategory;
     }
 
-    public static String GenerateRandomCategory(){
+    /**
+     * This method picks a random category from categories list
+     * @return String category
+     */
+    public static String generateRandomCategory(){
         Random rand = new Random();
-        ArrayList<String> categories = GetCategoryNames();
+        ArrayList<String> categories = getCategoryNames();
         String category = categories.get(rand.nextInt(categories.size()));
-        while(!IsCategoryAvailable(category)){
+        while(!isCategoryAvailable(category)){
             category = categories.get(rand.nextInt(categories.size()));
         }
         return category;
     }
 
-    public static void SetCurrentCategory(String category){
-        if(!IsCategoryAvailable(category)) return;
-        CurrentGameCategory = category;
+    public static void setCurrentCategory(String category){
+        if(!isCategoryAvailable(category)) return;
+        currentGameCategory = category;
     }
 
-    public static boolean IsCategoryAvailable(String category){
-        if(CurrentGameCategory == "NO_CATEGORIES") return false;
-        if(GameWordData.containsKey(category)){
-            if(GameWordDataCache.containsKey(category)){
-                if(GameWordData.get(category).size() == GameWordDataCache.get(category).size()){
+    /**
+     * This method checks if category is available
+     * @param category category to check it
+     * @return boolean if available
+     */
+    public static boolean isCategoryAvailable(String category){
+        if(currentGameCategory == "NO_CATEGORIES") return false;
+        if(gameWordData.containsKey(category)){
+            if(gameWordDataCache.containsKey(category)){
+                if(gameWordData.get(category).size() == gameWordDataCache.get(category).size()){
                     return false;
                 }
                 return true;
@@ -227,13 +244,17 @@ public class GameHandler {
         return false;
     }
 
-    public static boolean IsAnyCategoryAvailable(){
-        if(CurrentGameCategory == "NO_CATEGORIES") return false;
+    /**
+     * This method checks if any category available
+     * @return boolean if available
+     */
+    public static boolean isAnyCategoryAvailable(){
+        if(currentGameCategory == "NO_CATEGORIES") return false;
         boolean result = false;
-        for(String category : GameWordData.keySet()){
-            if(GameWordData.containsKey(category)){
-                if(GameWordDataCache.containsKey(category)){
-                    if(GameWordData.get(category).size() != GameWordDataCache.get(category).size()){
+        for(String category : gameWordData.keySet()){
+            if(gameWordData.containsKey(category)){
+                if(gameWordDataCache.containsKey(category)){
+                    if(gameWordData.get(category).size() != gameWordDataCache.get(category).size()){
                         result = true;
                     }
                 }else {

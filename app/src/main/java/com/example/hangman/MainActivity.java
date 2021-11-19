@@ -6,11 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.text.InputType;
-import android.text.Spanned;
 import android.text.method.DigitsKeyListener;
-import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String CurrentCategory = GameHandler.GetCurrentCategory();
+        String CurrentCategory = GameHandler.getCurrentCategory();
 
-        GameHandler.ResetCustomWord();
+        GameHandler.resetCustomWord();
 
         categories = findViewById(R.id.btnCat);
         categories.setText(CurrentCategory);
@@ -70,13 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
                 alert.setPositiveButton("Play", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        if (input.length() >= 3) {
+                        if (input.length() >= 3 && input.length() <= 9) {
                             String word = input.getText().toString();
-                            GameHandler.SetCustomWord(word);
+                            GameHandler.setCustomWord(word);
                             Intent i = new Intent(MainActivity.this, GameActivity.class);
                             startActivity(i);
                         } else {
-                            Toast.makeText(MainActivity.this, "Enter word length more than 2", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Enter word length between 3 and 9", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

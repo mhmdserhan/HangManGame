@@ -11,16 +11,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
@@ -31,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
 
     private ImageView hangManImage;
 
-    private int currentHangManState = 1;
+    private int currentHangManState = 1; // nb of fails
 
     private MediaPlayer music;
 
@@ -44,12 +41,12 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        CurrentCategory = GameHandler.GetCurrentCategory();
-        CurrentWord = GameHandler.GetNextWord().toUpperCase();
+        CurrentCategory = GameHandler.getCurrentCategory();
+        CurrentWord = GameHandler.getNextWord().toUpperCase();
 
         roundTv = findViewById(R.id.roundTv);
 
-        roundTv.setText("Streak: " + GameHandler.GetStreak());
+        roundTv.setText("Streak: " + GameHandler.getStreak());
 
         wordTv = findViewById(R.id.word);
 
@@ -57,8 +54,8 @@ public class GameActivity extends AppCompatActivity {
 
         catBtn.setEnabled(false);
 
-        String word = GameHandler.GetNextWord();
-        ArrayList<String> list = GameHandler.GetCategoryWords(CurrentCategory);
+        String word = GameHandler.getNextWord();
+        ArrayList<String> list = GameHandler.getCategoryWords(CurrentCategory);
         if (list.contains(word)) {
             catBtn.setText(CurrentCategory);
         } else {
@@ -131,7 +128,7 @@ public class GameActivity extends AppCompatActivity {
 
         soundBtn = findViewById(R.id.btnSound);
 
-        if (GameHandler.AreSoundsOn == false) {
+        if (GameHandler.areSoundsOn == false) {
             music.pause();
             soundBtn.setImageResource(R.drawable.sound_off);
         }
@@ -139,19 +136,22 @@ public class GameActivity extends AppCompatActivity {
         soundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (GameHandler.AreSoundsOn) {
+                if (GameHandler.areSoundsOn) {
                     music.pause();
                     soundBtn.setImageResource(R.drawable.sound_off);
-                    GameHandler.AreSoundsOn = false;
+                    GameHandler.areSoundsOn = false;
                 } else {
                     music.start();
                     soundBtn.setImageResource(R.drawable.sound_on);
-                    GameHandler.AreSoundsOn = true;
+                    GameHandler.areSoundsOn = true;
                 }
             }
         });
     }
 
+    /**
+     * This method updates the image after each fail
+     */
     public void UpdateImage(){
         switch(currentHangManState){
             case 2: hangManImage.setImageResource(R.drawable.hangman2); break;
@@ -166,6 +166,11 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * This method checks if the character entered by user is valid or not
+     * @param character character entered by user
+     * @return boolean if valid or not
+     */
     public Boolean IsCharValid(char character){
         char[] charArray = CurrentWord.toCharArray();
         for(char c : charArray){
@@ -176,6 +181,9 @@ public class GameActivity extends AppCompatActivity {
         return false;
     }
 
+    /**
+     * This method updates word after each character entered by user is correct
+     */
     public void UpdateWord(){
         String text = "";
         for(int i = 0; i < CurrentWord.length(); i++){
@@ -189,12 +197,15 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method checks if the user won or lose
+     */
     public void CheckGameState(){
         if(CurrentWord.equalsIgnoreCase(wordTv.getText().toString().replace(" ", ""))){
             Intent i = new Intent(GameActivity.this, EndGameActivity.class);
             i.putExtra("guessedWord", CurrentWord);
             i.putExtra("won", "true");
-            GameHandler.UpdateStreak(true);
+            GameHandler.updateStreak(true);
             music.stop();
             startActivity(i);
         }else if(currentHangManState == 8){//Game Lost
@@ -209,7 +220,7 @@ public class GameActivity extends AppCompatActivity {
             Intent i = new Intent(GameActivity.this, EndGameActivity.class);
             i.putExtra("guessedWord", CurrentWord);
             i.putExtra("won", "false");
-            GameHandler.UpdateStreak(false);
+            GameHandler.updateStreak(false);
             music.stop();
             startActivity(i);
         }

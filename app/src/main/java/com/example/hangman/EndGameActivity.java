@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.Html;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
@@ -36,9 +35,9 @@ public class EndGameActivity extends AppCompatActivity {
         String word = currentIntent.getStringExtra("guessedWord");
         won = Boolean.parseBoolean(currentIntent.getStringExtra("won"));
 
-        String CurrentCategory = GameHandler.GetCurrentCategory();//Use this to get the current category and hte above one to get the old
+        String CurrentCategory = GameHandler.getCurrentCategory();//Use this to get the current category and hte above one to get the old
 
-        GameHandler.ResetCustomWord();
+        GameHandler.resetCustomWord();
 
         gif = findViewById(R.id.gif);
         checkResult(won);
@@ -94,7 +93,7 @@ public class EndGameActivity extends AppCompatActivity {
                 alert.setPositiveButton("Play", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String word = input.getText().toString();
-                        GameHandler.SetCustomWord(word);
+                        GameHandler.setCustomWord(word);
                         Intent i = new Intent(EndGameActivity.this, GameActivity.class);
                         music.stop();
                         startActivity(i);
@@ -132,7 +131,7 @@ public class EndGameActivity extends AppCompatActivity {
 
     public void getWord(boolean won, String word) {
         if (won) {
-            result.setText("Good Job, Current Win Streak: " + GameHandler.GetStreak());
+            result.setText("Good Job, Current Win Streak: " + GameHandler.getStreak());
         } else {
             result.setText(Html.fromHtml("Game Over, The Word Was <font color='#FF0000'>" + word + "</font>"));
         }
