@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent i = new Intent(MainActivity.this, GameActivity.class);
                             startActivity(i);
                         } else {
-                            Toast.makeText(MainActivity.this, "Enter word length between 3 and 9", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Enter word length between 3 and 16", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
