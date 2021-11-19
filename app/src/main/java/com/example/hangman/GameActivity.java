@@ -57,9 +57,8 @@ public class GameActivity extends AppCompatActivity {
 
         catBtn.setEnabled(false);
 
-        String word = GameHandler.getNextWord();
-        ArrayList<String> list = GameHandler.getCategoryWords(CurrentCategory);
-        if (list.contains(word)) {
+
+        if (GameHandler.currentCustomWord.isEmpty()) {
             catBtn.setText(CurrentCategory);
         } else {
             catBtn.setText("Custom");
@@ -210,7 +209,6 @@ public class GameActivity extends AppCompatActivity {
             music.stop();
             startActivity(i);
         }else if(currentHangManState == 8){//Game Lost
-            //Vibrate On Wrong Character
             Vibrator v = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
