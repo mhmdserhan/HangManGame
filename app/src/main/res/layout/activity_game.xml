@@ -97,6 +97,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="40dp"
+        android:gravity="center"
         android:fontFamily="@font/textdefaultfont"
         android:textFontWeight="600"
         app:layout_constraintBottom_toBottomOf="parent"
