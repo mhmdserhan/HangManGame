@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This activity displays the categories in a list view
+ */
 public class CategoriesActivity extends AppCompatActivity {
 
     private ListView listV;

@@ -15,9 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+/**
+ * This activity displays the result of the game
+ * when user won or lose
+ */
 public class EndGameActivity extends AppCompatActivity {
 
     private ImageView gif;
@@ -92,12 +97,15 @@ public class EndGameActivity extends AppCompatActivity {
 
                 alert.setPositiveButton("Play", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        String word = input.getText().toString();
-                        GameHandler.setCustomWord(word);
-                        Intent i = new Intent(EndGameActivity.this, GameActivity.class);
-                        music.stop();
-                        startActivity(i);
-
+                        if (input.length() >= 3 && input.length() <= 16) {
+                            String word = input.getText().toString();
+                            GameHandler.setCustomWord(word);
+                            Intent i = new Intent(EndGameActivity.this, GameActivity.class);
+                            music.stop();
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(EndGameActivity.this, "Enter word length between 3 and 16", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 

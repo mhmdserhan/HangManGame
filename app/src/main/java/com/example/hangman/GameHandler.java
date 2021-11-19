@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+/**
+ * This program represents the hangman game handler
+ */
 public class GameHandler {
 
     static int currentGameStreak = 0; // win streak
@@ -42,6 +45,7 @@ public class GameHandler {
                     add("tennis");
                     add("pong");
                     add("soccer");
+                    add("basketballll");
                 }
             });
             put("Food", new ArrayList<String>() {

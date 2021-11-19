@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This adapter contains the list of available and unavailable categories
+ */
 public class CategoryListAdapter extends ArrayAdapter<String> {
 
     private int resourceLayout;

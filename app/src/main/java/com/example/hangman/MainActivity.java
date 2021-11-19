@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * This is the main activity that represents
+ * the welcome page, choose category and start the game
+ */
 public class MainActivity extends AppCompatActivity {
 
     private Button categories;
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                 alert.setPositiveButton("Play", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        if (input.length() >= 3 && input.length() <= 9) {
+                        if (input.length() >= 3 && input.length() <= 16) {
                             String word = input.getText().toString();
                             GameHandler.setCustomWord(word);
                             Intent i = new Intent(MainActivity.this, GameActivity.class);

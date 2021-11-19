@@ -20,6 +20,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This activity represents the hangman game
+ */
 public class GameActivity extends AppCompatActivity {
 
     private TextView roundTv, wordTv;
