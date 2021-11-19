@@ -126,13 +126,11 @@ public class GameActivity extends AppCompatActivity {
 
         music = MediaPlayer.create(GameActivity.this, R.raw.rope_music);
         music.setVolume(0.3f, 0.3f);
-        music.start();
         music.setLooping(true);
 
         soundBtn = findViewById(R.id.btnSound);
 
         if (GameHandler.areSoundsOn == false) {
-            music.pause();
             soundBtn.setImageResource(R.drawable.sound_off);
         }
 
@@ -245,6 +243,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        music.start();
+        if (GameHandler.areSoundsOn)
+            music.start();
     }
 }
