@@ -137,4 +137,16 @@ public class EndGameActivity extends AppCompatActivity {
             result.setText(Html.fromHtml("Game Over, The Word Was <font color='#FF0000'>" + word + "</font>"));
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        music.pause();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        music.start();
+    }
 }
