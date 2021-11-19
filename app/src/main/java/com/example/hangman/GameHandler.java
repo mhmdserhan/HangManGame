@@ -45,7 +45,7 @@ public class GameHandler {
                     add("tennis");
                     add("pong");
                     add("soccer");
-                    add("basketballll");
+                    add("basketball");
                 }
             });
             put("Food", new ArrayList<String>() {
