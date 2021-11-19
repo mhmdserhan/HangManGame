@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
@@ -55,7 +56,14 @@ public class GameActivity extends AppCompatActivity {
         catBtn = findViewById(R.id.catBtn);
 
         catBtn.setEnabled(false);
-        catBtn.setText(CurrentCategory);
+
+        String word = GameHandler.GetNextWord();
+        ArrayList<String> list = GameHandler.GetCategoryWords(CurrentCategory);
+        if (list.contains(word)) {
+            catBtn.setText(CurrentCategory);
+        } else {
+            catBtn.setText("Custom");
+        }
 
         hangManImage = findViewById(R.id.hangImage);
 

@@ -14,6 +14,7 @@ import android.text.method.KeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,11 +70,14 @@ public class MainActivity extends AppCompatActivity {
 
                 alert.setPositiveButton("Play", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        String word = input.getText().toString();
-                        GameHandler.SetCustomWord(word);
-                        Intent i = new Intent(MainActivity.this, GameActivity.class);
-                        startActivity(i);
-
+                        if (input.length() >= 3) {
+                            String word = input.getText().toString();
+                            GameHandler.SetCustomWord(word);
+                            Intent i = new Intent(MainActivity.this, GameActivity.class);
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Enter word length more than 2", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
